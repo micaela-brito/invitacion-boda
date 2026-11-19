@@ -213,6 +213,10 @@ html,body{max-width:100%;overflow-x:hidden;background:#3b000a}
 .form-spinner{width:28px;height:28px;border:2px solid #dbccbc;border-top-color:var(--wine);border-radius:50%;animation:formspin .8s linear infinite}
 @keyframes formspin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.form-spinner{animation:none}}
+/* Mensaje de espera del formulario; no afecta al resto de la invitación. */
+.dialog{position:relative}
+.form-loading{position:absolute;inset:52px 10px 14px;z-index:1;display:flex;align-items:center;justify-content:center;background:#fffaf3;color:#6f263d;font:italic 17px Georgia,serif;text-align:center;padding:20px}
+.form-loading[hidden]{display:none}
 </style>
 </head>
 <body class="intro-locked">
@@ -295,6 +299,7 @@ html,body{max-width:100%;overflow-x:hidden;background:#3b000a}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Confirmación de asistencia">
  <div class="dialog">
   <button class="close" onclick="closeModal()" aria-label="Cerrar formulario">×</button>
+  <div class="form-loading" id="formLoading" role="status" aria-live="polite" hidden>Cargando formulario...</div>
   <iframe class="form-frame" id="formFrame" title="Formulario de confirmación de asistencia" loading="eager" src="https://script.google.com/macros/s/AKfycbxd2DElVVosuh2nySS-aJJ3RYpW49Dd7IIZQXt8P4xwJ0740jitIyDokGU7hDx8aT6FOA/exec"></iframe>
  </div>
 </div>
@@ -352,11 +357,13 @@ const formLoading = document.getElementById('formLoading');
 let formularioCargado = false;
 formFrame.addEventListener('load', function () {
   formularioCargado = true;
-  formLoading.hidden = true;
+  if (formLoading) formLoading.hidden = true;
 });
 function openModal() {
-  formLoading.hidden = formularioCargado;
-  document.getElementById('modal').classList.add('open');
+  const modal = document.getElementById('modal');
+  if (!modal) return;
+  if (formLoading) formLoading.hidden = formularioCargado;
+  modal.classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeModal() {
