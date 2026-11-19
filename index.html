@@ -200,6 +200,10 @@ html,body{max-width:100%;overflow-x:hidden;background:#3b000a}
  .countdown-art{width:min(78vw,295px);max-height:30vh;margin-top:clamp(42px,6vh,68px)}
  .countdown .date-feature{margin-bottom:20px}
 }
+
+/* ÚNICO CAMBIO: bajar la ilustración respecto del contador, sin modificar su diseño. */
+.countdown-art{position:relative;top:42px}
+@media(max-width:520px){.countdown-art{top:30px}}
 </style>
 </head>
 <body class="intro-locked">
