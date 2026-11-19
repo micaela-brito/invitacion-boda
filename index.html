@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emanuel & Micaela | 15.01.27</title>
+<style>
+:root{--wine:#6f263d;--wine2:#8a4658;--gold:#b08a4a;--cream:#eee2d2;--paper:#fffaf3;--ink:#453832;--muted:#82736a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+.page{max-width:760px;margin:0 auto;min-height:100vh;background:var(--paper);box-shadow:0 0 35px #49342a12}
+.hero{padding:58px 24px 48px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#ead9c8 0%,#f8f0e6 54%,#fffaf3 100%)}
+.hero:before,.hero:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #b08a4a88;border-radius:50%;top:-115px;box-shadow:0 0 0 9px #b08a4a12,0 0 0 18px #6f263d08}
+.hero:before{left:-90px}.hero:after{right:-90px}
+.kicker{font:11px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:var(--wine2)}
+.names{font-size:clamp(42px,9vw,68px);font-weight:400;font-style:italic;color:var(--wine);line-height:1.12;margin:22px 0 12px}
+.amp{color:var(--gold);font-size:.7em}
+.rule{width:90px;height:1px;background:var(--gold);margin:25px auto}
+.date{font:13px Arial,sans-serif;letter-spacing:4px;color:var(--gold)}
+.intro{max-width:490px;margin:0 auto;padding:38px 25px 10px;text-align:center;line-height:1.8;font-size:18px}
+.intro p{margin:8px 0}
+.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:24px 26px}
+.card{border:1px solid #c9aa7d;padding:22px 14px;text-align:center;background:#fffaf3}
+.icon{font-size:22px;color:var(--gold);margin-bottom:10px}
+.label{font:10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--wine2)}
+.value{font-size:17px;margin-top:9px;line-height:1.5}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:22px 22px 42px}
+button,.button{border:1px solid var(--wine);background:var(--wine);color:white;padding:14px 20px;text-decoration:none;font:11px Arial,sans-serif;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;min-width:190px}
+.button.secondary{background:transparent;color:var(--wine)}
+.note{text-align:center;padding:0 25px 42px;color:var(--muted);font-size:15px;font-style:italic}
+.footer{text-align:center;padding:25px;background:#ead9c8;color:var(--wine);font-size:18px;font-style:italic}
+.modal{display:none;position:fixed;inset:0;background:#241a1acc;z-index:5;padding:20px;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.dialog{background:var(--paper);width:min(100%,460px);padding:28px;position:relative}
+.dialog h2{font-weight:400;font-style:italic;color:var(--wine);text-align:center;margin:5px 0 20px;font-size:30px}
+.close{position:absolute;right:14px;top:12px;background:none;border:0;color:var(--wine);min-width:0;padding:5px;font-size:22px}
+label{display:block;font:12px Arial,sans-serif;color:var(--wine);margin:14px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #c9aa7d;background:#fffdf9;font:15px Arial,sans-serif;color:var(--ink)}
+.submit{width:100%;margin-top:20px}
+#thanks{display:none;text-align:center;line-height:1.6;padding:10px}
+.small{font:11px Arial,sans-serif;color:var(--muted);text-align:center;margin-top:14px}
+@media(max-width:520px){.details{grid-template-columns:1fr}.hero{padding-top:48px}.intro{font-size:17px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="hero">
+    <div class="kicker">Nos casamos</div>
+    <h1 class="names">Emanuel <span class="amp">&</span><br>Micaela</h1>
+    <div class="rule"></div>
+    <div class="date">15 · 01 · 2027</div>
+  </section>
+  <section class="intro">
+    <p>Después de dar el sí, queremos compartir un almuerzo en familia con las personas que queremos.</p>
+    <p>Nos encantaría que nos acompañes en este día tan especial.</p>
+  </section>
+  <section class="details">
+    <div class="card"><div class="icon">♡</div><div class="label">La fecha</div><div class="value">Viernes<br>15 de enero de 2027</div></div>
+    <div class="card"><div class="icon">⌖</div><div class="label">El encuentro</div><div class="value">Quincho Ángel Hidalgo<br>La Esperanza, Jujuy</div></div>
+  </section>
+  <section class="actions">
+    <button type="button" onclick="openModal()">Confirmar asistencia</button>
+    <a class="button secondary" href="https://maps.google.com/maps?q=Casa%2BAngel%2BHidalgo%2BBarrio%2B15%2Bhect%C3%A1reas%2C%2Bmanzana%2Blote%2B8%2C%2BLa%2BEsperanza%2C%2BJujuy%2C%2BAR&sll=-24.23468859,-64.84926243" target="_blank" rel="noopener">Cómo llegar</a>
+  </section>
+  <div class="note" id="ubicacion">Quincho Ángel Hidalgo<br>Barrio 15 Hectáreas · Manzana Lote 8<br>La Esperanza, Jujuy</div>
+  <footer class="footer">Con cariño, Emanuel & Micaela</footer>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="formtitle">
+ <div class="dialog">
+  <button class="close" onclick="closeModal()" aria-label="Cerrar">×</button>
+  <h2 id="formtitle">¿Nos acompañás?</h2>
+  <form id="rsvp">
+   <label for="nombre">Nombre y apellido</label><input id="nombre" required placeholder="Tu nombre">
+   <label for="asistencia">¿Vas a asistir?</label><select id="asistencia" required><option value="">Seleccioná una opción</option><option>Sí, voy a asistir</option><option>No voy a poder asistir</option></select>
+   <label for="personas">¿Cuántas personas asistirán?</label><select id="personas"><option>1</option><option>2</option><option>3</option><option>4</option><option>5 o más</option></select>
+   <label for="comida">¿Tenés alguna restricción alimentaria? (opcional)</label><input id="comida" placeholder="Ej.: vegetariano/a">
+   <button class="submit" type="submit">Enviar respuesta</button>
+   <div class="small">Vista de muestra: todavía falta conectar el formulario para guardar las respuestas.</div>
+  </form>
+  <div id="thanks"><p>¡Gracias por responder!</p><p>En la versión final, tu respuesta quedará registrada para que podamos organizar el almuerzo.</p></div>
+ </div>
+</div>
+<script>
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function locationInfo(e){e.preventDefault();alert('En la versión final agregaremos la dirección exacta y el enlace de Google Maps.')}
+document.getElementById('rsvp').addEventListener('submit',function(e){e.preventDefault();document.getElementById('rsvp').style.display='none';document.getElementById('thanks').style.display='block';});
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+</script>
+</body>
+</html>
