@@ -31,7 +31,7 @@ button,.button{border:1px solid var(--wine);background:var(--wine);color:white;p
 .footer{text-align:center;padding:25px;background:#ead9c8;color:var(--wine);font-size:18px;font-style:italic}
 .modal{display:none;position:fixed;inset:0;background:#241a1acc;z-index:5;padding:20px;align-items:center;justify-content:center}
 .modal.open{display:flex}
-.dialog{background:var(--paper);width:min(100%,460px);padding:28px;position:relative}
+.dialog{background:var(--paper);width:min(100%,600px);padding:52px 10px 14px;position:relative;border-radius:8px;max-height:94vh;overflow:hidden}.form-frame{width:100%;height:min(650px,74vh);border:0;background:#fffaf4;display:block}.close{z-index:2}
 .dialog h2{font-weight:400;font-style:italic;color:var(--wine);text-align:center;margin:5px 0 20px;font-size:30px}
 .close{position:absolute;right:14px;top:12px;background:none;border:0;color:var(--wine);min-width:0;padding:5px;font-size:22px}
 label{display:block;font:12px Arial,sans-serif;color:var(--wine);margin:14px 0 6px}
@@ -65,27 +65,25 @@ input,select{width:100%;padding:12px;border:1px solid #c9aa7d;background:#fffdf9
   <div class="note" id="ubicacion">Quincho Ángel Hidalgo<br>Barrio 15 Hectáreas · Manzana Lote 8<br>La Esperanza, Jujuy</div>
   <footer class="footer">Con cariño, Emanuel & Micaela</footer>
 </main>
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="formtitle">
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Confirmación de asistencia">
  <div class="dialog">
-  <button class="close" onclick="closeModal()" aria-label="Cerrar">×</button>
-  <h2 id="formtitle">¿Nos acompañás?</h2>
-  <form id="rsvp">
-   <label for="nombre">Nombre y apellido</label><input id="nombre" required placeholder="Tu nombre">
-   <label for="asistencia">¿Vas a asistir?</label><select id="asistencia" required><option value="">Seleccioná una opción</option><option>Sí, voy a asistir</option><option>No voy a poder asistir</option></select>
-   <label for="personas">¿Cuántas personas asistirán?</label><select id="personas"><option>1</option><option>2</option><option>3</option><option>4</option><option>5 o más</option></select>
-   <label for="comida">¿Tenés alguna restricción alimentaria? (opcional)</label><input id="comida" placeholder="Ej.: vegetariano/a">
-   <button class="submit" type="submit">Enviar respuesta</button>
-   <div class="small">Vista de muestra: todavía falta conectar el formulario para guardar las respuestas.</div>
-  </form>
-  <div id="thanks"><p>¡Gracias por responder!</p><p>En la versión final, tu respuesta quedará registrada para que podamos organizar el almuerzo.</p></div>
+  <button class="close" onclick="closeModal()" aria-label="Cerrar formulario">×</button>
+  <iframe class="form-frame" id="formFrame" title="Formulario de confirmación de asistencia" loading="lazy" data-src="https://script.google.com/macros/s/AKfycbxd2DEIVVosuh2nySS-aJJ3RYpW49Dd7IIZQXt8P4xwJ0740jitlyDokGU7hDx8aT6FOA/exec"></iframe>
  </div>
 </div>
 <script>
-function openModal(){document.getElementById('modal').classList.add('open')}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-function locationInfo(e){e.preventDefault();alert('En la versión final agregaremos la dirección exacta y el enlace de Google Maps.')}
-document.getElementById('rsvp').addEventListener('submit',function(e){e.preventDefault();document.getElementById('rsvp').style.display='none';document.getElementById('thanks').style.display='block';});
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  const iframe=document.getElementById('formFrame');
+  if (!iframe.src) iframe.src=iframe.dataset.src;
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 </script>
 </body>
 </html>
