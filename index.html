@@ -17,6 +17,25 @@ html,body{margin:0;min-height:0;height:auto} body{background:var(--cream);color:
 .amp{color:var(--gold);font-size:.7em}
 .rule{width:90px;height:1px;background:var(--gold);margin:25px auto}
 .date{font:13px Arial,sans-serif;letter-spacing:4px;color:var(--gold)}
+.countdown{position:relative;text-align:center;background:var(--wine);color:#fff9f0;padding:43px 28px 54px;overflow:hidden}
+.countdown::before,.countdown::after{content:"";position:absolute;border:1px solid #c69c645c;width:150px;height:150px;border-radius:50%;pointer-events:none}
+.countdown::before{left:-105px;top:-100px}.countdown::after{right:-105px;bottom:-100px}
+.date-eyebrow{font:15px Georgia,serif;letter-spacing:3px;color:#f5dedc;text-transform:uppercase;text-align:center;margin:0 0 8px}
+.date-feature{display:grid;grid-template-columns:minmax(0,1fr) 116px minmax(0,1fr);align-items:center;gap:20px;margin:0 auto 32px;max-width:440px}
+.date-side{width:100%;min-width:0;font:14px Georgia,serif;letter-spacing:2.4px;color:#fff5ec;text-transform:uppercase}
+.date-side:before,.date-side:after{content:"";display:block;width:100%;height:1px;background:#c9a576;margin:8px 0}
+.date-day{display:block;font:italic 66px Georgia,serif;line-height:1.1;color:#fff8ed;text-align:center}
+.date-year{font:16px Georgia,serif;letter-spacing:3px;color:#e8ccab;text-align:center;margin:7px 0 0}
+.countdown-title{font:14px Georgia,serif;letter-spacing:3px;text-transform:uppercase;color:#fff4ee;margin:0 0 15px}
+.countdown-grid[hidden]{display:none}.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:470px;gap:12px;margin:0 auto}
+.countdown-unit{padding:5px 0;text-align:center}
+.countdown-unit+.countdown-unit{border-left:1px solid #b68c83a3}
+.countdown-number{font:clamp(28px,6vw,43px) Georgia,serif;color:#fff9f0;display:block;font-variant-numeric:tabular-nums}
+.countdown-label{font:10px Georgia,serif;color:#e0b7b9;display:block;margin-top:8px}
+.countdown-finished{font-size:19px;color:#fff7e9;font-style:italic}
+.botanical-strip{height:91px;background:#f8f0e6;overflow:hidden;border-bottom:1px solid #ead6c7}
+.botanical-strip svg{display:block;width:100%;height:100%;}
+@media(max-width:390px){.date-feature{grid-template-columns:minmax(0,1fr) 90px minmax(0,1fr);gap:8px}.date-side{font-size:12px}.date-day{font-size:55px}.countdown-grid{gap:3px}.countdown-label{font-size:9px}.countdown{padding-left:16px;padding-right:16px}}
 .intro{max-width:490px;margin:0 auto;padding:38px 25px 10px;text-align:center;line-height:1.8;font-size:18px}
 .intro p{margin:8px 0}
 .details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:24px 26px}
@@ -40,9 +59,32 @@ input,select{width:100%;padding:12px;border:1px solid #c9aa7d;background:#fffdf9
 #thanks{display:none;text-align:center;line-height:1.6;padding:10px}
 .small{font:11px Arial,sans-serif;color:var(--muted);text-align:center;margin-top:14px}
 @media(max-width:520px){.details{grid-template-columns:1fr}.hero{padding-top:48px}.intro{font-size:17px}}
+
+body.intro-locked{overflow:hidden}
+.opening-screen{position:fixed;inset:0;z-index:30;background:#eee0d0;display:flex;align-items:center;justify-content:center;padding:22px;transition:opacity .85s ease,visibility .85s ease}
+.opening-inner{width:min(100%,610px);max-height:96vh;text-align:center}
+.opening-eyebrow{color:#702b40;letter-spacing:3.5px;text-transform:uppercase;font:11px Arial,sans-serif;margin-bottom:16px}
+.envelope-photo-button{display:block;position:relative;width:100%;padding:0;border:0;min-width:0;background:none;cursor:pointer;overflow:hidden;border-radius:5px;transform-origin:50% 50%;transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s ease,filter .9s ease}
+.envelope-photo-button:focus-visible{outline:3px solid #b08a4a;outline-offset:5px}
+.envelope-photo-button img{display:block;width:100%;height:auto;max-height:92vh;object-fit:contain}
+.opening-caption{font:italic 19px Georgia,serif;color:#702b40;margin-top:20px}
+body.opening-active .envelope-photo-button{transform:perspective(900px) rotateX(-12deg) scale(1.11);filter:blur(2px);opacity:0}
+body.opening-active .opening-screen{opacity:0;visibility:hidden;pointer-events:none}
+body.invitation-open .opening-screen{display:none}
+@media(max-width:550px){.opening-screen{padding:15px}.opening-caption{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.opening-screen,.envelope-photo-button{transition:none}}
 </style>
 </head>
-<body>
+<body class="intro-locked">
+<section class="opening-screen" id="openingScreen" aria-label="Sobre de invitación">
+  <div class="opening-inner">
+    
+    <button class="envelope-photo-button" type="button" onclick="abrirInvitacion()" aria-label="Abrir la invitación de Emanuel y Micaela">
+      <img src="sobre-bordo.jpg" alt="Sobre bordó texturado con sello de cera dorado E y M, sobre tela beige" width="1024" height="1024">
+    </button>
+    
+  </div>
+</section>
 <main class="page">
   <section class="hero">
     <div class="kicker">Nos casamos</div>
@@ -50,12 +92,55 @@ input,select{width:100%;padding:12px;border:1px solid #c9aa7d;background:#fffdf9
     <div class="rule"></div>
     <div class="date">15 · 01 · 2027</div>
   </section>
+  <section class="countdown" aria-label="Fecha y cuenta regresiva de la boda">
+    <div class="date-feature">
+      <div class="date-side">Viernes</div>
+      <div class="date-center">
+        <div class="date-eyebrow">Enero</div>
+        <div class="date-day">15</div>
+        <div class="date-year">2027</div>
+      </div>
+      <div class="date-side">13:30 hs</div>
+    </div>
+    <h2 class="countdown-title">Faltan</h2>
+    <div id="countdown-grid" class="countdown-grid" role="timer" aria-live="off">
+      <div class="countdown-unit"><span id="days" class="countdown-number">--</span><span class="countdown-label">Días</span></div>
+      <div class="countdown-unit"><span id="hours" class="countdown-number">--</span><span class="countdown-label">Horas</span></div>
+      <div class="countdown-unit"><span id="minutes" class="countdown-number">--</span><span class="countdown-label">Min</span></div>
+      <div class="countdown-unit"><span id="seconds" class="countdown-number">--</span><span class="countdown-label">Seg</span></div>
+    </div>
+    <p id="countdown-finished" class="countdown-finished" hidden>¡Llegó nuestro gran día! ♡</p>
+  </section>
+  <div class="botanical-strip" aria-hidden="true">
+    <svg viewBox="0 0 760 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#987b65" stroke-width="1.1" opacity=".75">
+        <path d="M0 56 Q100 -1 229 72 T440 60 T760 48"/>
+        <path d="M0 91 Q160 22 302 72 T760 82" stroke="#b49b7f"/>
+      </g>
+      <g fill="#9d5766" opacity=".75">
+        <ellipse cx="110" cy="47" rx="8" ry="16" transform="rotate(36 110 47)"/>
+        <ellipse cx="128" cy="54" rx="8" ry="16" transform="rotate(-25 128 54)"/>
+        <ellipse cx="452" cy="62" rx="8" ry="16" transform="rotate(50 452 62)"/>
+        <ellipse cx="473" cy="69" rx="8" ry="16" transform="rotate(-35 473 69)"/>
+        <ellipse cx="672" cy="47" rx="7" ry="13" transform="rotate(35 672 47)"/>
+      </g>
+      <g fill="#b8a288" opacity=".72">
+        <ellipse cx="67" cy="60" rx="7" ry="15" transform="rotate(-40 67 60)"/>
+        <ellipse cx="250" cy="62" rx="7" ry="14" transform="rotate(42 250 62)"/>
+        <ellipse cx="555" cy="68" rx="7" ry="14" transform="rotate(-30 555 68)"/>
+      </g>
+      <g fill="#f8f0e6" stroke="#b27f83" stroke-width="1.1">
+        <circle cx="188" cy="65" r="11"/><circle cx="180" cy="59" r="7"/><circle cx="196" cy="58" r="7"/><circle cx="188" cy="71" r="7"/>
+        <circle cx="599" cy="69" r="11"/><circle cx="591" cy="63" r="7"/><circle cx="607" cy="62" r="7"/><circle cx="599" cy="75" r="7"/>
+      </g>
+      <g fill="#c29c61"><circle cx="188" cy="64" r="4"/><circle cx="599" cy="68" r="4"/></g>
+    </svg>
+  </div>
   <section class="intro">
     <p>Después de dar el sí, queremos compartir un almuerzo en familia con las personas que queremos.</p>
     <p>Nos encantaría que nos acompañes en este día tan especial.</p>
   </section>
-  <section class="details">
-    <div class="card"><div class="icon">♡</div><div class="label">La fecha</div><div class="value">Viernes<br>15 de enero de 2027</div></div>
+  <section class="details" style="grid-template-columns:1fr;max-width:560px;margin:auto">
     <div class="card"><div class="icon">⌖</div><div class="label">El encuentro</div><div class="value">Quincho Ángel Hidalgo<br>La Esperanza, Jujuy</div></div>
   </section>
   <section class="actions">
@@ -72,6 +157,36 @@ input,select{width:100%;padding:12px;border:1px solid #c9aa7d;background:#fffdf9
  </div>
 </div>
 <script>
+function abrirInvitacion(){
+  if(document.body.classList.contains('opening-active')) return;
+  document.body.classList.add('opening-active');
+  window.setTimeout(()=>{
+    document.body.classList.remove('intro-locked');
+    document.body.classList.add('invitation-open');
+  },900);
+}
+// Cuenta hasta las 13:30 del 15/01/2027, hora de Argentina (UTC-3).
+const weddingDate = new Date('2027-01-15T13:30:00-03:00').getTime();
+function updateCountdown() {
+  const remaining = Math.max(0, weddingDate - Date.now());
+  const totalSeconds = Math.floor(remaining / 1000);
+  if (remaining === 0) {
+    document.getElementById('countdown-grid').hidden = true;
+    document.getElementById('countdown-finished').hidden = false;
+    return;
+  }
+  const values = {
+    days: Math.floor(totalSeconds / 86400),
+    hours: Math.floor(totalSeconds % 86400 / 3600),
+    minutes: Math.floor(totalSeconds % 3600 / 60),
+    seconds: totalSeconds % 60
+  };
+  Object.entries(values).forEach(([id,value]) => {
+    document.getElementById(id).textContent = String(value).padStart(2,'0');
+  });
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
 function openModal() {
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
