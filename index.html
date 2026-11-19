@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emanuel & Micaela | 15.01.27</title>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
 <style>
 :root{--wine:#6f263d;--wine2:#8a4658;--gold:#b08a4a;--cream:#eee2d2;--paper:#fffaf3;--ink:#453832;--muted:#82736a}
 *{box-sizing:border-box}
@@ -204,6 +206,13 @@ html,body{max-width:100%;overflow-x:hidden;background:#3b000a}
 /* ÚNICO CAMBIO: bajar la ilustración respecto del contador, sin modificar su diseño. */
 .countdown-art{position:relative;top:42px}
 @media(max-width:520px){.countdown-art{top:30px}}
+/* Indicador de carga, exclusivo del formulario */
+.dialog{isolation:isolate}
+.form-loading{position:absolute;inset:52px 10px 14px;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;flex-direction:column;background:#fffaf4;color:var(--wine);font:14px Arial,sans-serif;text-align:center;pointer-events:none}
+.form-loading[hidden]{display:none}
+.form-spinner{width:28px;height:28px;border:2px solid #dbccbc;border-top-color:var(--wine);border-radius:50%;animation:formspin .8s linear infinite}
+@keyframes formspin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.form-spinner{animation:none}}
 </style>
 </head>
 <body class="intro-locked">
@@ -286,7 +295,7 @@ html,body{max-width:100%;overflow-x:hidden;background:#3b000a}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Confirmación de asistencia">
  <div class="dialog">
   <button class="close" onclick="closeModal()" aria-label="Cerrar formulario">×</button>
-  <iframe class="form-frame" id="formFrame" title="Formulario de confirmación de asistencia" loading="lazy" data-src="https://script.google.com/macros/s/AKfycbxd2DElVVosuh2nySS-aJJ3RYpW49Dd7IIZQXt8P4xwJ0740jitIyDokGU7hDx8aT6FOA/exec"></iframe>
+  <iframe class="form-frame" id="formFrame" title="Formulario de confirmación de asistencia" loading="eager" src="https://script.google.com/macros/s/AKfycbxd2DElVVosuh2nySS-aJJ3RYpW49Dd7IIZQXt8P4xwJ0740jitIyDokGU7hDx8aT6FOA/exec"></iframe>
  </div>
 </div>
 <script>
@@ -337,11 +346,18 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown,1000);
+// Precarga el formulario desde que abre la página, antes del clic.
+const formFrame = document.getElementById('formFrame');
+const formLoading = document.getElementById('formLoading');
+let formularioCargado = false;
+formFrame.addEventListener('load', function () {
+  formularioCargado = true;
+  formLoading.hidden = true;
+});
 function openModal() {
+  formLoading.hidden = formularioCargado;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
-  const iframe=document.getElementById('formFrame');
-  if (!iframe.src) iframe.src=iframe.dataset.src;
 }
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
