@@ -914,6 +914,22 @@ function alternarMusica(){
 document.getElementById('musicaBoda').addEventListener('play',actualizarBotonMusica);
 document.getElementById('musicaBoda').addEventListener('pause',actualizarBotonMusica);
 
+// Pausar el audio cuando se cambia de app, se bloquea el celular o la
+// pestaña queda en segundo plano. No reanudarlo sin un toque del invitado.
+function pausarMusicaFueraDePantalla(){
+  const audio=document.getElementById('musicaBoda');
+  if(audio && !audio.paused) audio.pause();
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden) pausarMusicaFueraDePantalla();
+});
+window.addEventListener('pagehide',pausarMusicaFueraDePantalla);
+// En algunos navegadores móviles, cambiar a otra aplicación dispara blur.
+window.addEventListener('blur',function(){
+  if(document.hidden || !document.hasFocus()) pausarMusicaFueraDePantalla();
+});
+
+
 
 // Usa la misma imagen como fondo difuminado sin descargar otro archivo.
 (function prepararFondoSobre(){
