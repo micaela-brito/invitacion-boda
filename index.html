@@ -691,6 +691,57 @@ body.envelope-opening .opening-backdrop{opacity:0 !important;}
   }
 }
 
+
+/* VERSION 20/11: hojas completas en móvil, sin fragmentos de hojas contiguas.
+   La vista de escritorio y la animación del sobre permanecen sin cambios. */
+@media (max-width:650px) and (pointer:coarse){
+ html,body{width:100%;height:100%;overflow:hidden!important;overscroll-behavior:none!important;}
+ body{position:relative;}
+ body.mobile-pages .page{
+   position:relative!important; width:100%!important;
+   height:100vh!important;height:100dvh!important;
+   overflow:hidden!important; max-width:none!important;
+   background:#FFFAF3!important;
+ }
+ body.mobile-pages .page > .invitation-first,
+ body.mobile-pages .page > .countdown,
+ body.mobile-pages .page > .third-page{
+   display:none!important;
+   position:absolute!important; inset:0!important;
+   width:100%!important;height:100%!important;min-height:0!important;
+   margin:0!important;overflow:hidden!important;
+   scroll-snap-align:none!important;
+ }
+ body.mobile-pages .page > .mobile-current{display:flex!important;}
+ body.mobile-pages .page > .invitation-first.mobile-current{align-items:center;justify-content:center;background:#FFFAF3!important;}
+ body.mobile-pages .page > .countdown.mobile-current{flex-direction:column;align-items:center;justify-content:center;}
+ body.mobile-pages .page > .third-page.mobile-current{flex-direction:column;justify-content:space-between;align-items:center;}
+ body.mobile-pages .invitation-first-art{width:100%!important;height:100%!important;object-fit:contain!important;}
+ /* Hoja 3: el espacio final se reparte entre dibujo y controles.
+    Los botones quedan en el CENTRO del hueco bajo la ilustración. */
+ body.mobile-pages .third-content-wrap{
+   flex:1 1 auto!important;min-height:0!important;width:100%!important;
+   display:grid!important;grid-template-rows:minmax(0,1fr) minmax(104px,0.26fr)!important;
+   align-content:stretch!important;align-items:stretch!important;
+   padding:0 8px!important;gap:0!important;
+   box-sizing:border-box!important;
+ }
+ body.mobile-pages .third-content-image{
+   display:block!important;grid-row:1!important;align-self:center!important;
+   width:100%!important;height:100%!important;max-height:100%!important;
+   object-fit:contain!important;object-position:center bottom!important;
+   min-height:0!important;margin:0!important;flex:none!important;
+ }
+ body.mobile-pages .third-page .third-actions-row{
+   display:flex!important;grid-row:2!important;
+   align-self:center!important;justify-self:center!important;
+   width:min(94%,560px)!important;margin:0 auto!important;
+   transform:none!important;gap:10px!important;flex:none!important;
+ }
+ body.mobile-pages .third-action{min-height:44px!important;}
+ body.mobile-pages .third-top-wrap,
+ body.mobile-pages .third-bottom-wrap{flex:0 0 auto!important;}
+}
 </style>
 </head>
 <body class="intro-locked">
@@ -892,6 +943,64 @@ function closeModal() {
 }
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+
+
+// Navegación móvil por pantallas completas: evita que asomen hojas vecinas.
+// Se activa solo en dispositivos táctiles de pantalla angosta.
+(function navegacionHojasMovil(){
+  const media=window.matchMedia('(max-width:650px) and (pointer:coarse)');
+  const page=document.querySelector('main.page');
+  if(!page) return;
+  const hojas=Array.from(page.children).filter(el=>
+    el.matches('.invitation-first,.countdown,.third-page'));
+  if(hojas.length!==3) return;
+  let actual=0;
+  let inicioX=0, inicioY=0, inicioTiempo=0;
+  const mostrar=(numero)=>{
+    actual=Math.max(0,Math.min(hojas.length-1,numero));
+    hojas.forEach((h,i)=>{
+      h.classList.toggle('mobile-current',i===actual);
+      h.setAttribute('aria-hidden',String(i!==actual));
+    });
+    window.scrollTo(0,0);
+  };
+  const activar=()=>{
+    const on=media.matches;
+    document.body.classList.toggle('mobile-pages',on);
+    if(on) mostrar(actual);
+    else hojas.forEach(h=>{h.classList.remove('mobile-current');h.removeAttribute('aria-hidden')});
+  };
+  activar();
+  if(media.addEventListener)media.addEventListener('change',activar);
+  else media.addListener(activar);
+  page.addEventListener('touchstart',e=>{
+    if(!media.matches||!document.body.classList.contains('invitation-open')||
+       document.querySelector('.modal.open')||e.touches.length!==1)return;
+    inicioX=e.touches[0].clientX;inicioY=e.touches[0].clientY;
+    inicioTiempo=Date.now();
+  },{passive:true});
+  page.addEventListener('touchmove',e=>{
+    if(!media.matches||!document.body.classList.contains('invitation-open')||
+       document.querySelector('.modal.open'))return;
+    // Evita el desplazamiento nativo y cualquier franja de otra página.
+    if(e.cancelable)e.preventDefault();
+  },{passive:false});
+  page.addEventListener('touchend',e=>{
+    if(!media.matches||!document.body.classList.contains('invitation-open')||
+       document.querySelector('.modal.open')||!e.changedTouches.length)return;
+    const dy=e.changedTouches[0].clientY-inicioY;
+    const dx=e.changedTouches[0].clientX-inicioX;
+    if(Math.abs(dy)>48 && Math.abs(dy)>Math.abs(dx)*1.2){
+      mostrar(actual+(dy<0?1:-1));
+    }
+  },{passive:true});
+  document.addEventListener('keydown',e=>{
+    if(!media.matches||!document.body.classList.contains('invitation-open')||
+       document.querySelector('.modal.open'))return;
+    if(e.key==='ArrowDown'||e.key==='PageDown')mostrar(actual+1);
+    if(e.key==='ArrowUp'||e.key==='PageUp')mostrar(actual-1);
+  });
+})();
 
 </script>
 </body>
