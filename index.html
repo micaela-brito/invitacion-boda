@@ -742,6 +742,39 @@ body.envelope-opening .opening-backdrop{opacity:0 !important;}
  body.mobile-pages .third-top-wrap,
  body.mobile-pages .third-bottom-wrap{flex:0 0 auto!important;}
 }
+
+/* CAMBIO PUNTUAL: en celular, el sobre y la primera hoja cubren toda el área visible.
+   Se usa cover para eliminar las franjas internas sin estirar las imágenes. */
+@media (max-width:650px) and (pointer:coarse) {
+  .opening-screen {
+    position:fixed !important; inset:0 !important; width:100vw !important;
+    height:100vh !important; height:100dvh !important; padding:0 !important;
+    overflow:hidden !important; background:#4d101e !important;
+  }
+  .opening-inner { width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; }
+  .envelope-photo-button {
+    width:100% !important; height:100% !important; min-width:0 !important;
+    border:0 !important; border-radius:0 !important; overflow:hidden !important;
+    background:#4d101e !important;
+  }
+  .envelope-photo-button > img.envelope-source,
+  .envelope-photo-button > img.envelope-panel {
+    display:block !important; width:100% !important; height:100% !important;
+    max-width:none !important; max-height:none !important;
+    object-fit:cover !important; object-position:center center !important;
+  }
+  .envelope-photo-button > img.envelope-reveal-card {
+    width:100% !important; height:100% !important; max-width:none !important;
+    max-height:none !important; border-radius:0 !important;
+    object-fit:cover !important; object-position:center center !important;
+  }
+  body.mobile-pages .invitation-first-art {
+    display:block !important; width:100% !important; height:100% !important;
+    max-width:none !important; max-height:none !important;
+    object-fit:cover !important; object-position:center center !important;
+  }
+}
+
 </style>
 </head>
 <body class="intro-locked">
