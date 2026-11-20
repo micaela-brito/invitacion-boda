@@ -419,48 +419,6 @@ html,body{margin:0;padding:0}
 }
 .third-curve-svg{display:block;width:100%;height:100%;overflow:hidden}
 
-/* Cuarta hoja: álbum colaborativo, lista para conectar el QR definitivo. */
-.fourth-page{
-  height:100vh;height:100dvh;min-height:0;box-sizing:border-box;
-  scroll-snap-align:start;scroll-snap-stop:always;
-  position:relative;overflow:hidden;
-  background:#FFFAF3; color:#4d1117;
-  display:flex;align-items:center;justify-content:center;
-  padding:clamp(30px,6dvh,65px) 20px;
-  text-align:center;
-}
-.fourth-page::before,.fourth-page::after{
-  content:"";position:absolute;left:0;width:100%;pointer-events:none;
-  height:clamp(22px,5dvh,48px);background:#700018;
-}
-.fourth-page::before{top:0;border-bottom:3px solid #c99437;clip-path:polygon(0 0,100% 0,100% 35%,75% 65%,50% 100%,25% 65%,0 35%)}
-.fourth-page::after{bottom:0;border-top:3px solid #c99437;clip-path:polygon(0 65%,25% 35%,50% 0,75% 35%,100% 65%,100% 100%,0 100%)}
-.fourth-content{width:min(100%,570px);display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2dvh,20px)}
-.fourth-kicker{font:600 clamp(11px,1.4vw,16px) Georgia,serif;letter-spacing:.32em;color:#9b6b2c}
-.fourth-title{font:normal clamp(28px,4vw,48px) Georgia,serif;line-height:1.12;margin:0}
-.fourth-message{font:normal clamp(15px,2.2vw,20px) Georgia,serif;line-height:1.48;max-width:490px;margin:0}
-.fourth-rule{color:#bc8934;font-size:21px}
-.album-qr-space{
-  box-sizing:border-box;width:clamp(145px,26dvh,225px);aspect-ratio:1;
-  border:1.5px solid #c99437;border-radius:14px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  padding:16px;background:#fffdf9;
-}
-.album-qr-space svg{width:clamp(32px,6dvh,50px);height:auto;stroke:#bc8934}
-.album-qr-space span{font:500 clamp(11px,1.4vw,14px) Arial,sans-serif;line-height:1.35;color:#8b5559}
-.fourth-foot{font:normal clamp(13px,1.6vw,16px) Georgia,serif;font-style:italic;margin:0}
-@media(max-width:650px){
- .fourth-page{padding:clamp(48px,9dvh,72px) 22px}
- .fourth-content{gap:clamp(10px,2dvh,16px)}
- .fourth-title{font-size:clamp(29px,7vw,39px)}
- .fourth-message{font-size:clamp(15px,4vw,18px)}
-}
-@media(max-height:570px){
- .fourth-content{gap:7px}.fourth-title{font-size:26px}.fourth-message{font-size:13px}
- .album-qr-space{width:125px;padding:8px}.fourth-foot{font-size:12px}
-}
-
-
 /* Primera hoja beige crema: se conserva el diseño original y se elimina la ubicación. */
 .invitation-first{background:#FFFAF3;}
 .invitation-first::before{background-image:none!important;filter:none!important;background:#FFFAF3!important;inset:0!important;transform:none!important;}
@@ -472,6 +430,64 @@ html,body{margin:0;padding:0}
 .invitation-first::before{background:none!important;filter:none!important;}
 .invitation-first-art{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important;filter:none!important;}
 @media(max-width:650px){.invitation-first-art{object-fit:contain!important;}}
+
+/* Cuarta hoja: sugerencias musicales. Fondo vino de la secuencia alternada. */
+.fourth-page{background:#430009!important;color:#fffaf3!important;padding:clamp(16px,3dvh,38px) 16px!important;}
+.fourth-page::before,.fourth-page::after{display:none!important;}
+.fourth-content{width:min(100%,510px);max-height:100%;gap:clamp(7px,1.5dvh,16px);}
+.fourth-kicker{color:#d7b37b;letter-spacing:.25em;font-size:clamp(10px,1.4dvh,15px);}
+.fourth-title{color:#fffaf3;font-size:clamp(27px,min(4vw,4.8dvh),44px);line-height:1.12;}
+.fourth-message{color:#fffaf3;font-size:clamp(13px,min(2vw,2.2dvh),18px);line-height:1.4;max-width:440px;}
+.music-ornament{color:#c9a576;font:clamp(14px,2.4dvh,23px) Georgia,serif;letter-spacing:.15em;white-space:nowrap;}
+.music-form{display:flex;flex-direction:column;text-align:left;gap:clamp(4px,.7dvh,8px);width:min(100%,410px);margin:clamp(3px,.8dvh,8px) auto 0;}
+.music-form label{color:#f4dfbd;font:clamp(11px,1.6dvh,13px) Arial,sans-serif;letter-spacing:.06em;margin:0;}
+.music-optional{font-weight:normal;opacity:.8;}
+.music-form input{display:block;width:100%;min-width:0;height:clamp(37px,5.3dvh,46px);border:1px solid #c9a576;border-radius:7px;background:#fffaf3;color:#4d1117;font:clamp(13px,1.9dvh,16px) Arial,sans-serif;padding:8px 12px;box-sizing:border-box;}
+.music-form input::placeholder{color:#83686a;opacity:1;}
+.music-form input:focus-visible,.music-send:focus-visible{outline:3px solid #f3d49b;outline-offset:2px;}
+.music-send{margin-top:clamp(4px,1.1dvh,11px);min-height:clamp(42px,6dvh,50px);width:100%;min-width:0;border:1px solid #d1a960;border-radius:7px;background:#fffaf3;color:#66051b;font:600 clamp(12px,1.9dvh,15px) Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:10px;}
+.music-send span{font-size:18px;vertical-align:-1px;}
+.music-note{font:clamp(10px,1.3dvh,12px) Arial,sans-serif;color:#e9d5bc;text-align:center;line-height:1.3;margin:2px 0 0;}
+.fourth-foot{color:#f4dfbd;font-size:clamp(12px,1.8dvh,16px);line-height:1.3;}
+@media (max-height:680px){.fourth-content{gap:5px}.fourth-page{padding:10px 12px!important}.music-form{gap:3px}.fourth-message{font-size:13px}.music-form input{height:35px}.music-send{min-height:38px}}
+
+/* Sobre original: apertura de las dos solapas laterales, con tarjeta detrás. */
+.opening-screen{perspective:1100px;transition:opacity .48s ease, visibility .48s ease !important;transition-delay:0s}
+.envelope-photo-button{isolation:isolate;perspective:1100px;transform:none!important;transition:none!important;}
+.envelope-photo-button > img:not(.opening-backdrop){position:relative;z-index:2;transition:opacity .08s linear !important;}
+.envelope-reveal-card{position:absolute;z-index:1;left:50%;top:50%;
+  display:block;width:auto;height:min(77dvh,720px);max-width:88vw;
+  object-fit:contain;border-radius:3px;
+  transform:translate(-50%,-40%) scale(.76);opacity:0;
+  box-shadow:0 13px 45px #1700066b;pointer-events:none;
+  transition:transform 1.05s cubic-bezier(.2,.65,.2,1) .17s,opacity .42s ease .1s;
+}
+.envelope-panel{position:absolute!important;inset:0;width:100%!important;height:100%!important;
+  max-height:none!important;display:block;object-fit:cover;object-position:center;
+  z-index:4;pointer-events:none;backface-visibility:hidden;
+  transition:transform 1.18s cubic-bezier(.18,.74,.23,1) .12s,filter 1s ease .12s;
+}
+.envelope-panel--left{clip-path:polygon(0 0,50% 0,50% 100%,0 100%);transform-origin:left center}
+.envelope-panel--right{clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%);transform-origin:right center}
+/* El sello se separa suavemente antes de abrir las dos solapas. */
+.envelope-seal{position:absolute;z-index:5;left:50%;top:50%;width:clamp(65px,13vh,150px);height:clamp(65px,13vh,150px);
+  border-radius:50%;background-size:880px 1564px;background-position:center center;
+  transform:translate(-50%,-50%);pointer-events:none;
+  transition:transform .46s ease,opacity .34s ease;}
+/* No deformar las solapas: heredan el mismo encuadre de la imagen original. */
+@media(min-aspect-ratio:4/5){.envelope-panel{object-fit:contain}}
+@media(max-aspect-ratio:4/5){.envelope-panel{object-fit:cover}}
+body.envelope-opening .envelope-photo-button > img:not(.opening-backdrop):not(.envelope-panel):not(.envelope-reveal-card){opacity:0}
+body.envelope-opening .envelope-panel--left{transform:translateX(-57%) rotateY(-9deg);filter:brightness(.78)}
+body.envelope-opening .envelope-panel--right{transform:translateX(57%) rotateY(9deg);filter:brightness(.78)}
+body.envelope-opening .envelope-reveal-card{opacity:1;transform:translate(-50%,-50%) scale(.98)}
+body.envelope-opening .envelope-seal{opacity:0;transform:translate(-50%,-50%) scale(.65)}
+body.envelope-opening .opening-screen{opacity:1!important;visibility:visible!important;pointer-events:none}
+body.envelope-completed .opening-screen{opacity:0!important;visibility:hidden!important}
+@media(prefers-reduced-motion:reduce){
+ .envelope-panel,.envelope-reveal-card,.envelope-seal{transition:none!important}
+}
+
 </style>
 </head>
 <body class="intro-locked">
@@ -558,24 +574,7 @@ html,body{margin:0;padding:0}
     </div>
   </section>
 
-  <section class="fourth-page" aria-label="Álbum compartido de nuestra boda">
-    <div class="fourth-content">
-      <div class="fourth-kicker">15 · 01 · 2027</div>
-      <h2 class="fourth-title">Nuestros recuerdos</h2>
-      <p class="fourth-message">Los momentos más lindos también se guardan en las fotos que sacamos juntos.</p>
-      <div class="fourth-rule" aria-hidden="true">──── ♡ ────</div>
-      <p class="fourth-message">Compartí las fotos y videos que saques durante nuestro almuerzo en familia.</p>
-      <div class="album-qr-space" role="note" aria-label="Espacio reservado para el código QR del álbum compartido">
-        <svg viewBox="0 0 64 64" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="8" y="8" width="17" height="17" rx="1"/><rect x="39" y="8" width="17" height="17" rx="1"/><rect x="8" y="39" width="17" height="17" rx="1"/>
-          <path d="M14 14h5v5h-5zM45 14h5v5h-5zM14 45h5v5h-5zM36 35h7v7h-7zM48 35h8M48 42v7h8M35 50h7v6h-7z"/>
-        </svg>
-        <span>Aquí irá el QR de nuestro álbum</span>
-      </div>
-      <p class="fourth-foot">¡Gracias por ayudarnos a guardar cada recuerdo!</p>
-      <div class="fourth-kicker">Emanuel &amp; Micaela</div>
-    </div>
-  </section>
+
 
 </main>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Confirmación de asistencia">
@@ -597,13 +596,35 @@ html,body{margin:0;padding:0}
   fondo.removeAttribute('alt');
   portada.insertBefore(fondo, portada.firstChild);
 })();
+// Preparar las dos mitades del sobre usando la foto original, sin cambiar su diseño.
+(function prepararSobreAnimado(){
+  const boton=document.querySelector('.envelope-photo-button');
+  const foto=boton?.querySelector('img');
+  const tarjeta=document.querySelector('.invitation-first-art');
+  if(!boton || !foto || !tarjeta) return;
+  const papel=tarjeta.cloneNode(false);
+  papel.className='envelope-reveal-card';
+  papel.alt='';papel.setAttribute('aria-hidden','true');
+  boton.insertBefore(papel,foto);
+  for(const lado of ['left','right']){
+    const capa=foto.cloneNode(false);
+    capa.className='envelope-panel envelope-panel--'+lado;
+    capa.alt='';capa.setAttribute('aria-hidden','true');
+    boton.appendChild(capa);
+  }
+})();
 function abrirInvitacion(){
-  if(document.body.classList.contains('opening-active')) return;
-  document.body.classList.add('opening-active');
+  if(document.body.classList.contains('envelope-opening') || document.body.classList.contains('invitation-open'))return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.body.classList.add('envelope-opening');
   window.setTimeout(()=>{
+    document.documentElement.scrollTop=0;
     document.body.classList.remove('intro-locked');
-    document.body.classList.add('invitation-open');
-  },900);
+    document.body.classList.add('envelope-completed');
+    window.setTimeout(()=>{
+      document.body.classList.add('invitation-open');
+    },reduce?0:480);
+  },reduce?100:1470);
 }
 // El fondo de la primera hoja es la misma ilustración, desenfocada.
 (function prepararFondoTarjeta(){
@@ -654,6 +675,7 @@ function closeModal() {
 }
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+
 </script>
 </body>
 </html>
