@@ -600,6 +600,19 @@ body.envelope-opening .opening-backdrop{opacity:0 !important;}
  .envelope-photo-button > img.envelope-panel,
  .envelope-photo-button > img.envelope-reveal-card{transition:none !important;}
 }
+
+/* Fondo del SOBRE cerrado: vino oscuro, como la versión preferida.
+   Solo al iniciar la apertura se revela el beige de la invitación. */
+body:not(.envelope-opening):not(.envelope-completed):not(.invitation-open) .opening-screen {
+  background:#25060c !important;
+}
+body:not(.envelope-opening):not(.envelope-completed):not(.invitation-open) .envelope-photo-button {
+  background:#25060c !important;
+}
+body.envelope-opening .opening-screen,
+body.envelope-opening .envelope-photo-button {
+  background:#FFFAF3 !important;
+}
 </style>
 </head>
 <body class="intro-locked">
