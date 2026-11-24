@@ -1588,6 +1588,64 @@ main.page > section.third-page .third-actions-row .third-action, body.mobile-pag
   flex-shrink:0!important;
  }
 }
+
+/* Cuarta hoja móvil: proporciones equilibradas en toda la altura. */
+@media(max-width:650px){
+ main.page > section.third-page > .third-content-wrap,
+ body.mobile-pages main.page > section.third-page > .third-content-wrap{
+  box-sizing:border-box!important;display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  padding:clamp(48px,9dvh,78px) 18px calc(60px + env(safe-area-inset-bottom,0px))!important;
+  gap:clamp(8px,1.5dvh,12px)!important;
+ }
+ main.page > section.third-page .mobile-fourth-copy,
+ body.mobile-pages main.page > section.third-page .mobile-fourth-copy{
+  width:min(100%,350px)!important;font-size:clamp(15px,4.25vw,19px)!important;
+  line-height:1.42!important;gap:clamp(9px,1.6dvh,14px)!important;
+  margin:0 auto clamp(12px,2.5dvh,20px)!important;
+ }
+ main.page > section.third-page .mobile-fourth-copy .fourth-copy-highlight{
+  font-size:clamp(17px,4.7vw,21px)!important;line-height:1.36!important;
+ }
+ main.page > section.third-page .mobile-fourth-art,
+ body.mobile-pages main.page > section.third-page .mobile-fourth-art{
+  width:min(100%,355px)!important;height:auto!important;max-height:39dvh!important;
+  flex:0 1 auto!important;object-fit:contain!important;margin:0 auto!important;
+ }
+ main.page > section.third-page .third-actions-row,
+ body.mobile-pages main.page > section.third-page .third-actions-row{
+  width:min(100%,340px)!important;flex:0 0 auto!important;
+  margin:auto auto auto!important;gap:12px!important;
+ }
+ main.page > section.third-page .third-actions-row .third-action,
+ body.mobile-pages main.page > section.third-page .third-actions-row .third-action{
+  min-height:44px!important;white-space:nowrap!important;
+ }
+}
+@media(max-width:650px) and (max-height:600px){
+ body.mobile-pages main.page > section.third-page > .third-content-wrap{padding-top:28px!important;padding-bottom:56px!important;}
+ body.mobile-pages main.page > section.third-page .mobile-fourth-art{max-height:33dvh!important;}
+ body.mobile-pages main.page > section.third-page .third-actions-row{margin-top:16px!important;}
+}
+
+
+/* Ajuste vertical móvil: bajar el texto sin cambiar su tamaño. */
+@media(max-width:650px){
+ main.page > section.third-page > .third-content-wrap,
+ body.mobile-pages main.page > section.third-page > .third-content-wrap{
+  padding-top:clamp(70px,15dvh,120px)!important;
+  padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))!important;
+  justify-content:flex-start!important;
+ }
+ main.page > section.third-page .third-actions-row,
+ body.mobile-pages main.page > section.third-page .third-actions-row{
+  margin:auto auto!important;
+ }
+}
+@media(max-width:650px) and (max-height:600px){
+ body.mobile-pages main.page > section.third-page > .third-content-wrap{padding-top:clamp(44px,11dvh,66px)!important;}
+}
+
 </style>
 </head>
 <body class="intro-locked">
