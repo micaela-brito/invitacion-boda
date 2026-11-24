@@ -843,6 +843,47 @@ body.invitation-open .music-toggle{display:flex}
   line-height:1.42;margin:0;max-width:480px;color:#e8c997;
 }
 @media(max-height:620px){.dress-pool{font-size:14px;line-height:1.27}}
+
+/* Ajuste exclusivo de cuarta hoja — versión breve y aireada en PC/móvil. */
+.dress-page{padding:clamp(28px,5dvh,60px) 24px!important}
+.dress-content{
+  width:min(88%,800px)!important;
+  height:min(79dvh,690px)!important;
+  min-height:0!important;
+  max-height:100%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:space-evenly!important;
+  align-items:center!important;
+  gap:0!important;
+}
+.dress-content .dress-ornament{font-size:clamp(19px,2vw,26px);line-height:1.2}
+.dress-content .dress-title{font-size:clamp(35px,3.5vw,58px);line-height:1.12;max-width:100%}
+.dress-content .dress-lead{font-size:clamp(20px,2vw,29px);line-height:1.3}
+.dress-content .dress-line{width:min(58%,350px)}
+.dress-content .dress-reserved{font-size:clamp(20px,1.9vw,27px);line-height:1.48;max-width:700px}
+.dress-content .dress-pool{
+  font:italic clamp(20px,1.9vw,27px) Georgia,serif;
+  line-height:1.55;color:#eed1a2;margin:0;max-width:650px;
+}
+.dress-content .dress-pool strong{font-weight:normal;color:#fffaf3}
+@media (max-width:650px){
+  .dress-page{padding:clamp(18px,4dvh,35px) 18px!important}
+  .dress-content{width:100%!important;height:min(77dvh,660px)!important}
+  .dress-content .dress-ornament{font-size:clamp(17px,5vw,23px)}
+  .dress-content .dress-title{font-size:clamp(29px,7vw,37px)}
+  .dress-content .dress-lead{font-size:clamp(18px,4.75vw,23px)}
+  .dress-content .dress-reserved{font-size:clamp(17px,4.35vw,21px);line-height:1.45}
+  .dress-content .dress-pool{font-size:clamp(17px,4.35vw,21px);line-height:1.5}
+  .dress-desktop-break{display:none}
+}
+@media (max-height:620px){
+  .dress-page{padding:12px 16px!important}
+  .dress-content{height:91dvh!important}
+  .dress-content .dress-title{font-size:clamp(26px,4vw,37px)}
+  .dress-content .dress-reserved,.dress-content .dress-pool{font-size:clamp(15px,2.3vw,21px)}
+}
+
 </style>
 </head>
 <body class="intro-locked">
@@ -936,12 +977,10 @@ body.invitation-open .music-toggle{display:flex}
     <div class="dress-content">
       <div class="dress-ornament" aria-hidden="true">✦ ─── ♡ ─── ✦</div>
       <h2 class="dress-title">Código de vestimenta</h2>
-      <p class="dress-lead">¡Vení con el look que más te guste!</p>
-      <p class="dress-description">Queremos que disfrutes de un almuerzo al aire libre, con comodidad y a tu estilo.</p>
+      <p class="dress-lead">¡Vení a tu estilo!</p>
       <div class="dress-line" aria-hidden="true"></div>
-      <p class="dress-detail">Solo un pequeño detalle...</p>
-      <p class="dress-reserved">El <strong>blanco, marfil, crema y hueso</strong> quedan reservados para la novia. ♡</p>
-      <p class="dress-pool">¡No olvides traer traje de baño si querés disfrutar de la pileta!</p>
+      <p class="dress-reserved">El <strong>blanco, marfil, crema y hueso</strong><br class="dress-desktop-break"> quedan reservados para la novia. ♡</p>
+      <p class="dress-pool">¿Querés disfrutar de la pileta?<br><strong>¡Traé traje de baño!</strong></p>
       <div class="dress-ornament" aria-hidden="true">✦ ─── ♡ ─── ✦</div>
     </div>
   </section>
