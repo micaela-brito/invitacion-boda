@@ -1370,6 +1370,58 @@ main.page > .third-page > .third-bottom-wrap {display:none!important;}
  body.envelope-opening .envelope-photo-button{background:#FCF5ED!important}
  .envelope-photo-button > img.envelope-reveal-card{object-fit:cover!important;object-position:center!important}
 }
+
+/* CORRECCIÓN FINAL PORTADA: la misma portada aprobada en ambas pantallas.
+   No duplicar las flores ni estirar una imagen vertical en el escritorio. */
+@media (min-width:651px) and (pointer:fine) {
+  main.page > section.invitation-first {
+    background:#FCF5ED !important;
+    background-image:none !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    isolation:isolate !important;
+    height:100dvh !important;
+    min-height:0 !important;
+  }
+  main.page > section.invitation-first::before,
+  main.page > section.invitation-first::after {display:none!important;content:none!important;}
+  main.page > section.invitation-first img.desktop-approved-cover,
+  main.page > section.invitation-first .desktop-first-lettering,
+  main.page > section.invitation-first .desktop-first-design {
+    display:none!important;visibility:hidden!important;
+  }
+  main.page > section.invitation-first img.invitation-first-art {
+    display:block!important;visibility:visible!important;
+    position:relative!important;z-index:2!important;
+    width:auto!important;height:100%!important;
+    max-width:min(100%,calc(100dvh * 941 / 1672))!important;
+    max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;
+    transform:none!important;filter:none!important;
+    opacity:1!important;
+  }
+  /* Cuarta hoja: escala proporcionada, centro visual real del texto, dibujo y botones. */
+  main.page > section.third-page .third-content-wrap {
+    width:min(96vw,1110px)!important;
+    max-width:1110px!important;
+    margin:0 auto!important;
+    padding:clamp(14px,2.1dvh,24px) 12px!important;
+    justify-content:center!important;
+    align-items:center!important;
+    gap:clamp(10px,1.8dvh,19px)!important;
+  }
+  main.page > section.third-page .third-content-image {
+    width:100%!important;
+    max-height:min(71dvh,695px)!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  main.page > section.third-page .third-actions-row {
+    width:min(83%,785px)!important;
+    margin:clamp(8px,1.5dvh,16px) auto!important;
+  }
+}
 </style>
 </head>
 <body class="intro-locked">
