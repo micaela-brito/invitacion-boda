@@ -836,6 +836,13 @@ body.invitation-open .music-toggle{display:flex}
   }
 }
 
+
+/* Cuarta hoja: recordatorio de pileta, sin alterar el resto de la invitación. */
+.dress-pool{
+  font:italic clamp(15px,2.5dvh,19px) Georgia,serif;
+  line-height:1.42;margin:0;max-width:480px;color:#e8c997;
+}
+@media(max-height:620px){.dress-pool{font-size:14px;line-height:1.27}}
 </style>
 </head>
 <body class="intro-locked">
@@ -927,7 +934,6 @@ body.invitation-open .music-toggle{display:flex}
   <!-- Cuarta hoja: código de vestimenta para el almuerzo en quincho. -->
   <section class="dress-page" aria-label="Código de vestimenta">
     <div class="dress-content">
-      <div class="dress-kicker">EMANUEL &amp; MICAELA · 15.01.27</div>
       <div class="dress-ornament" aria-hidden="true">✦ ─── ♡ ─── ✦</div>
       <h2 class="dress-title">Código de vestimenta</h2>
       <p class="dress-lead">¡Vení con el look que más te guste!</p>
@@ -935,8 +941,8 @@ body.invitation-open .music-toggle{display:flex}
       <div class="dress-line" aria-hidden="true"></div>
       <p class="dress-detail">Solo un pequeño detalle...</p>
       <p class="dress-reserved">El <strong>blanco, marfil, crema y hueso</strong> quedan reservados para la novia. ♡</p>
+      <p class="dress-pool">¡No olvides traer traje de baño si querés disfrutar de la pileta!</p>
       <div class="dress-ornament" aria-hidden="true">✦ ─── ♡ ─── ✦</div>
-      <p class="dress-bottom">¡Nos encantará compartir este día con vos!</p>
     </div>
   </section>
 
